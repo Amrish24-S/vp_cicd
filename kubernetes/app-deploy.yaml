@@ -17,10 +17,6 @@ spec:
       containers:
       - name: vproapp
         image: amrish24/vproapp:latest
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
         - containerPort: 8080
           name: vproapp-port
