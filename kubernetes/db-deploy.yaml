@@ -17,10 +17,6 @@ spec:
       containers:
       - name: vprodb
         image: amrish24/vprodb:latest
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
         - containerPort: 3306
           name: vprodb-port
