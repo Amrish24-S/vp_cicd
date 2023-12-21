@@ -16,14 +16,14 @@ spec:
     spec:
       containers:
       - name: vproapp
-        image: amrish24/vproapp:latest
+        image: {{ .Values.appimage}}
         ports:
         - containerPort: 8080
           name: vproapp-port
       initContainers:
-      - name: init-app1
-        image: busybox:latest
+      - name: init-mydb
+        image: busybox
         command: ['sh', '-c', 'until nslookup vprodb.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done;']
-      - name: init-app2
-        image: busybox:latest
-        command: ['sh', '-c', 'until nslookup vprocache01.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mc; sleep 2; done;']
+      - name: init-memcache
+        image: busybox
+        command: ['sh', '-c', 'until nslookup vprocache01.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done;']
