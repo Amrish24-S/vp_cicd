@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         registry = "amrish24/vproapp"
-        registryCredential = ''
+        registryCredential = 'dockerhub'
     }
     stages {
         stage ('BUILD') {
@@ -38,10 +38,10 @@ pipeline {
         }
         stage ('SONARQUBE ANALYSIS') {
             environment {
-                scannerHme = tool ''
+                scannerHme = tool 'Sonar4.7'
             }
             steps {
-                withSonarQubeEnv(''){
+                withSonarQubeEnv('Sonar-server'){
                     sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
                    -Dsonar.projectName=vprofile-repo \
                    -Dsonar.projectVersion=1.0 \
