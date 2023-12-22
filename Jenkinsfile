@@ -78,5 +78,11 @@ pipeline {
                 sh "docker rmi $registry:V$BUILD_NUMBER"
             }
         }
+        stage ('KUBERNETES DEPLOY') {
+            agent {label 'KOPS'}
+            steps {
+                sh "helm upgrade --install --force vp-stack helm/vpcharts --set appimage=$registry:V$BUILD_NUMBER  --namespace prod"
+            }
+        }
     }
 }
